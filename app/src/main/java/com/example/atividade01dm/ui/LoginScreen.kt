@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -35,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.atividade01dm.R
+import com.example.atividade01dm.api.ApiState
 import com.example.atividade01dm.ui.viewmodel.AuthViewModel
 
 @Composable
@@ -42,9 +45,12 @@ fun LoginScreen(
     navController: NavController
 ) {
     val viewModel = viewModel<AuthViewModel>()
+    val loginState by viewModel.loginResponseBody;
+
+
     var emailState by remember { mutableStateOf("") }
     var senhaState by remember { mutableStateOf("") }
-    var errorMessageState by remember { mutableStateOf("") }
+    var authLoading by remember { mutableStateOf(false) }
 
     Surface(
         modifier = Modifier,
@@ -65,20 +71,29 @@ fun LoginScreen(
                     .size(200.dp)
             )
 
-            if (!errorMessageState.isNullOrBlank()) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(250, 136, 127))
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = errorMessageState,
-                        modifier = Modifier,
-                        color = Color.White,
-                        fontSize = 16.sp
-                    )
+            when(loginState) {
+                is ApiState.Created -> {}
+                is ApiState.Loading -> {
+                    authLoading = true
+                }
+                is ApiState.Success -> {
+                    authLoading = false
+                    navController.navigate("inicio");
+                }
+                is ApiState.Error -> {
+                    loginState.message?.let { message ->
+                        Text(
+                            message,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp),
+                            style = TextStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Red
+                            )
+                        )
+                    }
+                    authLoading = false;
                 }
             }
 
@@ -113,20 +128,18 @@ fun LoginScreen(
                 onClick = {
                     viewModel.signIn(
                         emailState,
-                        senhaState,
-                        onSuccess = {
-
-                        },
-                        onError = { message ->
-                            errorMessageState = message
-                        }
+                        senhaState
                     )
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(45.dp),
             ) {
-                Text(text = "Entrar")
+                if (authLoading == true) {
+                    Text("Carregando...");
+                } else {
+                    Text("Entrar");
+                }
             }
 
         }
