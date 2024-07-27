@@ -71,15 +71,17 @@ fun LoginScreen(
                     .size(200.dp)
             )
 
-            when(loginState) {
+            when (loginState) {
                 is ApiState.Created -> {}
                 is ApiState.Loading -> {
                     authLoading = true
                 }
+
                 is ApiState.Success -> {
                     authLoading = false
                     navController.navigate("inicio");
                 }
+
                 is ApiState.Error -> {
                     loginState.message?.let { message ->
                         Text(
@@ -135,11 +137,7 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .height(45.dp),
             ) {
-                if (authLoading == true) {
-                    Text("Carregando...");
-                } else {
-                    Text("Entrar");
-                }
+                Text(if (authLoading) "Aguarde..." else "Entrar");
             }
 
         }
@@ -149,6 +147,6 @@ fun LoginScreen(
 @Composable
 @Preview
 fun LoginScreenPreview() {
-    LoginScreen(rememberNavController())
+    (rememberNavController())
 }
 
