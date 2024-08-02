@@ -2,6 +2,7 @@ package com.example.atividade01dm.api
 
 import com.example.atividade01dm.api.request.LoginRequestBody
 import com.example.atividade01dm.api.response.LoginResponseBody
+import com.example.atividade01dm.api.response.UsuarioResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -11,6 +12,6 @@ interface ApiEndpoint {
     @POST("/login")
     suspend fun login(@Body requestBody: LoginRequestBody) : Response<LoginResponseBody>
 
-//    @GET("/usuarios")
-//    suspend fun usuarios(): Response<>
+    @GET("/usuarios")
+    suspend fun getUsuarios(): Response<UsuarioResponseBody>
 }
