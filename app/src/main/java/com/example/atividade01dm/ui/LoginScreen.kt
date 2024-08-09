@@ -48,8 +48,8 @@ fun LoginScreen(
     val loginState by viewModel.loginResponseBody;
 
 
-    var emailState by remember { mutableStateOf("") }
-    var senhaState by remember { mutableStateOf("") }
+    var emailState by remember { mutableStateOf("alx.delira@gmail.com") }
+    var senhaState by remember { mutableStateOf("12345678") }
     var authLoading by remember { mutableStateOf(false) }
 
     Surface(
@@ -62,7 +62,6 @@ fun LoginScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
-
         ) {
             Image(
                 painter = painterResource(id = R.drawable.bandeiraluffy),
@@ -114,7 +113,7 @@ fun LoginScreen(
 
             OutlinedTextField(
                 value = senhaState,
-                onValueChange = { senhaState = it },
+                onValueChange = { senhaState = it},
                 modifier = Modifier
                     .fillMaxWidth(),
                 label = { Text(text = "Senha") },

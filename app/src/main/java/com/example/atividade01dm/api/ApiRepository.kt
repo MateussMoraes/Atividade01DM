@@ -2,7 +2,10 @@ package com.example.atividade01dm.api
 
 import com.example.atividade01dm.api.model.Usuario
 import com.example.atividade01dm.api.request.LoginRequestBody
+import com.example.atividade01dm.api.request.UsuarioEditarRequestBody
 import com.example.atividade01dm.api.response.LoginResponseBody
+import com.example.atividade01dm.api.response.UsuarioEditarResponseBody
+import com.example.atividade01dm.api.response.UsuarioIdResponseBody
 import com.example.atividade01dm.api.response.UsuarioResponseBody
 
 class ApiRepository : BaseRepository() {
@@ -12,5 +15,13 @@ class ApiRepository : BaseRepository() {
 
     suspend fun getUsuarios(): ApiState<UsuarioResponseBody> {
         return  makeApiCall { ApiClient.apiEndpoint.getUsuarios() }
+    }
+
+    suspend fun getUsuarioId(id: String): ApiState<UsuarioIdResponseBody> {
+        return makeApiCall { ApiClient.apiEndpoint.getUsuarioId(id) }
+    }
+
+    suspend fun editarUsuario(id: String, requestBody: UsuarioEditarRequestBody): ApiState<UsuarioEditarResponseBody> {
+        return makeApiCall { ApiClient.apiEndpoint.editarUsuario(id, requestBody) }
     }
 }

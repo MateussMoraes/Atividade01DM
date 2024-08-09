@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Atividade01DM</string>
+    <string name="inicio">Inicio</string>
+    <string name="usuarios">Usuarios</string>
 </resources>

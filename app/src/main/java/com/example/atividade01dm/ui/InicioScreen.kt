@@ -28,57 +28,13 @@ fun InicioScreen(
     navController: NavController
 ) {
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
-                ),
-                title = {
-                    Text(text = "Tela de início")
-                }
-            )
-        },
-        bottomBar = {
-            BottomAppBar(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary,
-                actions = {
-                        IconButton(
-                            onClick = { /*TODO*/ },
-                            modifier = Modifier,
-                        ) {
-                            Icon(
-                                Icons.Default.Home,
-                                contentDescription = "Tela inicial",
-                                modifier = Modifier,
-                            )
-                        }
-
-                        IconButton(
-                            onClick = { /*TODO*/ },
-                            modifier = Modifier,
-                        ) {
-                            Icon(
-                                Icons.Default.People,
-                                contentDescription = "Tela de usuários",
-                                modifier = Modifier,
-                            )
-                        }
-                }
-            )
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Text(text = "Tela de início")
-        }
+    Column(
+        modifier = Modifier
+    ) {
+        Text(text = "Tela de início")
     }
 }
+
 
 @Composable
 @Preview

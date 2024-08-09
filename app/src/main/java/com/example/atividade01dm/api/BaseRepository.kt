@@ -1,5 +1,6 @@
 package com.example.atividade01dm.api
 
+import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,6 +29,7 @@ abstract class BaseRepository {
                     message = "Falha na conexão com o servidor!"
                 )
             } catch (e: Exception) {
+                Log.i("safira", e.message.toString())
                 ApiState.Error(
                     message = "Não foi possível concluir usa solicitação"
                 )

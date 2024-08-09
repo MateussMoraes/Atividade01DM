@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://api-estudos.vercel.app";
+    private const val BASE_URL = "https://alexandre-3030.code.fslab.dev";
 
     private val authInterceptor: AuthInterceptor by lazy {
         val appDataStore = AppDataStore(MainApplication.instace.applicationContext);
