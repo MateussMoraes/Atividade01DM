@@ -61,4 +61,13 @@ class AuthViewModel(
         }
     }
 
+    fun sair() {
+        runBlocking {
+            val appDataStore = AppDataStore(application.applicationContext)
+
+            appDataStore.putBoolean(AppDataStoreKeys.AUTENTICADO, false)
+            appDataStore.putString(AppDataStoreKeys.TOKEN, "")
+        }
+    }
+
 }

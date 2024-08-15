@@ -6,9 +6,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.preferences.protobuf.Api
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.atividade01dm.api.ApiRepository
 import com.example.atividade01dm.api.ApiState
+import com.example.atividade01dm.api.request.UsuarioCadastrarRequestBody
 import com.example.atividade01dm.api.request.UsuarioEditarRequestBody
+import com.example.atividade01dm.api.response.UsuarioCadastrarResponseBody
 import com.example.atividade01dm.api.response.UsuarioEditarResponseBody
 import com.example.atividade01dm.api.response.UsuarioIdResponseBody
 import com.example.atividade01dm.api.response.UsuarioResponseBody
@@ -27,6 +30,9 @@ class UsuarioViewModel(
 
     private val _usuarioEditarResponseBody = mutableStateOf<ApiState<UsuarioEditarResponseBody>>(ApiState.Created())
     val usuarioEditarResponseBody: State<ApiState<UsuarioEditarResponseBody>> = _usuarioEditarResponseBody
+
+    private val _usuarioCadastrarResponseBody = mutableStateOf<ApiState<UsuarioCadastrarResponseBody>>(ApiState.Created())
+    val usuarioCadastrarResponseBody: State<ApiState<UsuarioCadastrarResponseBody>> = _usuarioCadastrarResponseBody
 
     fun getUsuarios() {
         viewModelScope.launch {
@@ -56,6 +62,28 @@ class UsuarioViewModel(
         viewModelScope.launch {
             _usuarioEditarResponseBody.value = ApiState.Loading()
             _usuarioEditarResponseBody.value = apiRepository.editarUsuario(id, requestBody)
+        }
+    }
+
+    fun cadastrarUsuario(requestBody: UsuarioCadastrarRequestBody) {
+        if (requestBody.nome.isBlank()) {
+            _usuarioCadastrarResponseBody.value = ApiState.Error("Nome é obrigatório")
+            return
+        }
+
+        if (requestBody.email.isBlank()) {
+            _usuarioCadastrarResponseBody.value = ApiState.Error("Email é obrigatório")
+            return
+        }
+
+        if (requestBody.senha.isBlank()) {
+            _usuarioCadastrarResponseBody.value = ApiState.Error("Senha é obrigatório")
+            return
+        }
+
+        viewModelScope.launch {
+            _usuarioCadastrarResponseBody.value = ApiState.Loading()
+            _usuarioCadastrarResponseBody.value = apiRepository.cadastrarUsuario(requestBody)
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.People
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.atividade01dm.R
 
@@ -22,7 +23,7 @@ sealed class Screen(
 
     object Usuarios : Screen(
         "usuario",
-        Icons.Default.Checklist,
+        Icons.Default.People,
         "Usuário",
         R.string.usuarios
     )

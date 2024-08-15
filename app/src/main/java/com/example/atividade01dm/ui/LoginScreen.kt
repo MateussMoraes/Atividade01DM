@@ -64,7 +64,7 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.bandeiraluffy),
+                painter = painterResource(id = R.drawable.logoifroverticalescura),
                 contentDescription = "Bandeira do Luffy",
                 modifier = Modifier
                     .size(200.dp)

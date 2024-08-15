@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.atividade01dm.ui.InicioScreen
 import com.example.atividade01dm.ui.LoginScreen
+import com.example.atividade01dm.ui.UsuarioCadastrarScreen
 import com.example.atividade01dm.ui.UsuarioEditarScreen
 import com.example.atividade01dm.ui.UsuarioScreen
 import com.example.atividade01dm.ui.theme.Atividade01DMTheme
@@ -40,12 +41,19 @@ class MainActivity : ComponentActivity() {
                             composable("login") {
                                 LoginScreen(navController = navController)
                             }
+
                             composable("inicio") {
                                 InicioScreen(navController = navController)
                             }
+
                             composable("usuario") {
                                 UsuarioScreen(navController = navController)
                             }
+
+                            composable("usuarioCadastrar") {
+                                UsuarioCadastrarScreen(navController = navController)
+                            }
+
                             composable("usuarioEditar/{userId}") { backStackEntry ->
                                 val userId = backStackEntry.arguments?.getString("userId");
 

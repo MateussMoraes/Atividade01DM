@@ -1,8 +1,10 @@
 package com.example.atividade01dm.api
 
 import com.example.atividade01dm.api.request.LoginRequestBody
+import com.example.atividade01dm.api.request.UsuarioCadastrarRequestBody
 import com.example.atividade01dm.api.request.UsuarioEditarRequestBody
 import com.example.atividade01dm.api.response.LoginResponseBody
+import com.example.atividade01dm.api.response.UsuarioCadastrarResponseBody
 import com.example.atividade01dm.api.response.UsuarioEditarResponseBody
 import com.example.atividade01dm.api.response.UsuarioIdResponseBody
 import com.example.atividade01dm.api.response.UsuarioResponseBody
@@ -25,4 +27,7 @@ interface ApiEndpoint {
 
     @PUT("/usuarios/{id}")
     suspend fun editarUsuario(@Path("id") id: String, @Body requestBody: UsuarioEditarRequestBody): Response<UsuarioEditarResponseBody>
+
+    @POST("/usuarios")
+    suspend fun cadastrarUsuario(@Body requestBody: UsuarioCadastrarRequestBody): Response<UsuarioCadastrarResponseBody>
 }

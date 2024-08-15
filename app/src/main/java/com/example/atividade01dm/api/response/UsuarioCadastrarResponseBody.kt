@@ -1,13 +1,13 @@
 package com.example.atividade01dm.api.response
 
-data class UsuarioEditarResponseBody (
+data class UsuarioCadastrarResponseBody(
     var message: String,
-    var usuarioAtualizado: usuarioAtualizado
+    var novoUsuario: novoUsuario
 )
 
-data class usuarioAtualizado(
+data class novoUsuario(
     var _id: String = "",
-    var nome: String = "",
     var email: String = "",
+    var nome: String = "",
     var foto: String? = ""
 )
